@@ -15,6 +15,29 @@ cp install-certs.sh /opt/ && cp update-certs.sh /opt/
 chmod +x /opt/install-certs.sh && chmod +x /opt/update-certs.sh
 ```
 
+### Preparation in HAProxy
+Firstly, as you will see when checking the scripts in this repo. the directory /etc/haproxy/ssl is used by this setup. Since this directory must be created manually, do so by running this command.
+
+```
+mkdir /etc/haproxy/ssl
+```
+
+In order to get HAProxy to use a directory for serving the certificates, you should use the following parameters in haproxy.cfg
+
+```
+frontend VIP-https-443
+    bind *:443,:::443 v6only ssl crt /etc/haproxy/ssl/
+```
+Notice: On some systems i found the next config to be better fitting to do the job.
+
+```
+frontend VIP-https-443
+    bind 0.0.0.0:443 ssl alpn h2,http/1.1 npn h2,http/1.1 crt /etc/haproxy/ssl/
+    bind :::443 v6only ssl alpn h2,http/1.1 npn h2,http/1.1 crt /etc/haproxy/ssl/
+```
+
+Ofcourse, the name of the frontend can be changed to fit your needs.
+
 ## How to start
 Initially when requesting your first couple of certificates, you should utilize Certbot (or LetsEncrypt for all that matters) to retrieve new certificates. This is the command to use for that;
 
