@@ -30,7 +30,6 @@ root@server:/# /opt/install-certs.sh
 Now fixing domain.com
 Now fixing domain1.com
 Now fixing domain2.com
-Now fixing domain3.com
-`
+Now fixing domain3.com`
 
 And thats it! You're done. From now on, all certificates will be renewed and automaticly be converted to HAProxy-compatible certificates.
