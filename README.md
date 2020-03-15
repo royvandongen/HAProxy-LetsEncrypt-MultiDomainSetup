@@ -10,26 +10,32 @@ However, in my setup i did not wanted to have one certificate for all the websit
 ### The scripts in this repo
 After installing the setup like the ServersforHackers, you are met with a working setup. However you can now choose to extend the functionality. This can be done by using the install-certs.sh and update-certs.sh i have attached.
 
-` cp install-certs.sh /opt/ && cp update-certs.sh /opt/
-chmod +x /opt/install-certs.sh && chmod +x /opt/update-certs.sh`
+```
+cp install-certs.sh /opt/ && cp update-certs.sh /opt/
+chmod +x /opt/install-certs.sh && chmod +x /opt/update-certs.sh
+```
 
 ## How to start
 Initially when requesting your first couple of certificates, you should utilize Certbot (or LetsEncrypt for all that matters) to retrieve new certificates. This is the command to use for that;
 
-`certbot certonly --standalone -d www.domain.com -d domain.com --non-interactive --http-01-port=8888 --agree-tos --email emailaddress@domain.com`
+```
+certbot certonly --standalone -d www.domain.com -d domain.com --non-interactive --http-01-port=8888 --agree-tos --email emailaddress@domain.com
+```
 
 This will result in a certificate beeing places in the /etc/letsencrypt/ folder structure. 
 
 ### Converting and installing the LetsEncrypt certificates
 After the retrieval of a new certificate, you should run the install script that was added to this repo.
 
-`/opt/install-certs.sh
+```
+/opt/install-certs.sh
 
 root@server:/# /opt/install-certs.sh
 
 Now fixing domain.com
 Now fixing domain1.com
 Now fixing domain2.com
-Now fixing domain3.com`
+Now fixing domain3.com
+```
 
 And thats it! You're done. From now on, all certificates will be renewed and automaticly be converted to HAProxy-compatible certificates.
